@@ -152,6 +152,30 @@ em {
   transform: scaleX(1);
   transform-origin: left;
 }
+.nav-end {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 2vw, 28px);
+}
+.nav-gh {
+  color: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 0.35rem 0.8rem;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+.nav-gh span {
+  color: var(--vermilion);
+  transition: color 0.3s;
+}
+.nav-gh:hover {
+  background: var(--vermilion);
+  border-color: var(--vermilion);
+  color: var(--ink);
+}
+.nav-gh:hover span {
+  color: var(--ink);
+}
 .clock {
   display: flex;
   align-items: center;
@@ -1036,6 +1060,9 @@ h2 em {
 /* ---------- Phone ---------- */
 @media (max-width: 640px) {
   .nav-links {
+    display: none;
+  }
+  .clock {
     display: none;
   }
   .hero {

@@ -11,6 +11,8 @@ const scribbleUnderline = `<svg class="scribble" viewBox="0 0 300 20" preserveAs
 const scribbleCircle = `<svg class="ring" viewBox="0 0 220 90" preserveAspectRatio="none" aria-hidden="true"><path d="M168 12 C 120 -2, 30 4, 12 36 C -4 66, 70 88, 140 82 C 200 76, 222 50, 206 28 C 196 14, 160 6, 120 8" /></svg>`;
 const arrow = `<svg class="arrow" viewBox="0 0 120 80" aria-hidden="true"><path d="M6 10 C 30 60, 70 70, 108 52" /><path d="M94 42 L 110 52 L 96 66" /></svg>`;
 
+const github = profile.links.find((l) => l.label === "GitHub");
+
 const stampText = "Immediate joiner ✺ DE · AI · Freelance ✺ ";
 
 function nav(): string {
@@ -23,7 +25,10 @@ function nav(): string {
       <a href="#toolkit">Toolkit</a>
       <a href="#contact">Contact</a>
     </nav>
-    <p class="clock mono"><span class="dot"></span>BLR <time id="clock">--:--</time> IST</p>
+    <div class="nav-end">
+      ${github ? `<a class="nav-gh mono" href="${esc(github.href)}" target="_blank" rel="noopener">GitHub <span>↗</span></a>` : ""}
+      <p class="clock mono"><span class="dot"></span>BLR <time id="clock">--:--</time> IST</p>
+    </div>
   </header>`;
 }
 
@@ -200,6 +205,7 @@ function contact(): string {
   <footer class="footer mono">
     <p>© ${new Date().getFullYear()} ${esc(profile.firstName)} ${esc(profile.middleName)} ${esc(profile.lastName)}</p>
     <p>Set in Fraunces &amp; Instrument Sans. Hand-built in TypeScript.</p>
+    ${github ? `<a href="${esc(github.href)}" target="_blank" rel="noopener">GitHub ↗</a>` : ""}
     <a href="#top">Back to top ↑</a>
   </footer>`;
 }
