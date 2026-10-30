@@ -65,6 +65,20 @@ export const stats = [
 
 export const projects: Project[] = [
   {
+    title: "MovieLens on dbt",
+    kicker: "Side project · analytics engineering",
+    problem:
+      "32 million raw movie ratings are only useful once they're modelled, tested and able to keep history when a record changes, and the source has no updated_at column to say when it did.",
+    built:
+      "A dbt pipeline on BigQuery that takes the MovieLens 32M CSVs through bronze → silver → gold into a star schema with a genre bridge. Changes are found by comparing values: an incremental MD5-hash merge gives SCD1, and a dbt snapshot gives SCD2. Custom generic and cross-model singular tests guard every layer.",
+    result: [
+      { figure: "32M", label: "ratings modelled into a star schema" },
+      { figure: "~70", label: "data-quality tests on every build" },
+    ],
+    stack: ["dbt", "BigQuery", "SQL", "uv", "Google Cloud SDK"],
+    link: "https://github.com/ssd713092000-star/dbt-bigquery-project",
+  },
+  {
     title: "Iceberg Medallion on GCP",
     kicker: "Side project · lakehouse",
     problem:
