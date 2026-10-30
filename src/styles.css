@@ -5,8 +5,7 @@
   --paper-dim: #a39a8b;
   --muted: #6f675b;
   --rule: rgba(236, 229, 216, 0.14);
-  --vermilion: #e8542f;
-  --vermilion-soft: rgba(232, 84, 47, 0.14);
+  --accent: #7c8cff;
   --serif: "Fraunces", Georgia, "Times New Roman", serif;
   --sans: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
@@ -57,7 +56,7 @@ body::after {
 }
 
 ::selection {
-  background: var(--vermilion);
+  background: var(--accent);
   color: var(--ink);
 }
 
@@ -83,7 +82,7 @@ em {
   text-transform: uppercase;
 }
 :focus-visible {
-  outline: 2px dashed var(--vermilion);
+  outline: 2px dashed var(--accent);
   outline-offset: 4px;
 }
 
@@ -93,7 +92,7 @@ em {
   left: 0;
   right: 0;
   height: 2px;
-  background: var(--vermilion);
+  background: var(--accent);
   transform-origin: left;
   transform: scaleX(0);
   z-index: 60;
@@ -125,7 +124,7 @@ em {
   font-weight: 300;
 }
 .mark span {
-  color: var(--vermilion);
+  color: var(--accent);
 }
 .nav-links {
   display: flex;
@@ -143,7 +142,7 @@ em {
   right: 0;
   bottom: 0;
   height: 1px;
-  background: var(--vermilion);
+  background: var(--accent);
   transform: scaleX(0);
   transform-origin: right;
   transition: transform 0.4s var(--ease);
@@ -165,12 +164,12 @@ em {
   transition: background 0.3s, color 0.3s, border-color 0.3s;
 }
 .nav-gh span {
-  color: var(--vermilion);
+  color: var(--accent);
   transition: color 0.3s;
 }
 .nav-gh:hover {
-  background: var(--vermilion);
-  border-color: var(--vermilion);
+  background: var(--accent);
+  border-color: var(--accent);
   color: var(--ink);
 }
 .nav-gh:hover span {
@@ -203,7 +202,7 @@ main > section {
   padding: clamp(80px, 12vw, 180px) var(--gutter);
 }
 .label {
-  color: var(--vermilion);
+  color: var(--accent);
   margin-bottom: 2.5rem;
 }
 h2 {
@@ -215,7 +214,7 @@ h2 {
   font-variation-settings: "opsz" 144, "SOFT" 50;
 }
 h2 em {
-  color: var(--vermilion);
+  color: var(--accent);
   font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
 }
 
@@ -270,7 +269,7 @@ h2 em {
   font-weight: 400;
 }
 .name .l2 em {
-  color: var(--vermilion);
+  color: var(--accent);
   font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
 }
 .name .l3 {
@@ -283,12 +282,12 @@ h2 em {
 .name .l1 { transition-delay: 0.05s; }
 .name .l2 { transition-delay: 0.15s; }
 .name .l3 { transition-delay: 0.25s; }
-/* The orange bar is a nod to the reference hero. */
+/* The accent bar is a nod to the reference hero. */
 .bar {
   display: inline-block;
   width: 1.15em;
   height: 0.2em;
-  background: var(--vermilion);
+  background: var(--accent);
   border-radius: 0.1em 0.04em 0.12em 0.05em;
   transform: rotate(-2deg) translateY(0.08em);
 }
@@ -369,7 +368,7 @@ h2 em {
   inset: 0;
   display: grid;
   place-items: center;
-  color: var(--vermilion);
+  color: var(--accent);
   font-size: 2rem;
 }
 @keyframes spin {
@@ -413,7 +412,7 @@ h2 em {
 .scribble path,
 .arrow path {
   fill: none;
-  stroke: var(--vermilion);
+  stroke: var(--accent);
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -476,7 +475,7 @@ h2 em {
   color: var(--paper-dim);
 }
 .ticker-track b {
-  color: var(--vermilion);
+  color: var(--accent);
   font-weight: 400;
   font-size: 0.7em;
 }
@@ -508,7 +507,7 @@ h2 em {
   font-size: 3.4em;
   line-height: 0.82;
   padding: 0.06em 0.1em 0 0;
-  color: var(--vermilion);
+  color: var(--accent);
   font-weight: 600;
   font-variation-settings: "SOFT" 100, "WONK" 1;
 }
@@ -525,7 +524,7 @@ h2 em {
   margin-top: clamp(4rem, 9vw, 8rem);
 }
 .stat {
-  border-left: 3px solid var(--vermilion);
+  border-left: 3px solid var(--accent);
   padding-left: 1rem;
 }
 .stat:nth-child(2) { transition-delay: 0.08s; margin-top: 2.5rem; }
@@ -541,7 +540,7 @@ h2 em {
 }
 .figure sup {
   font-size: 0.42em;
-  color: var(--vermilion);
+  color: var(--accent);
   vertical-align: super;
   margin-left: 0.05em;
 }
@@ -557,6 +556,7 @@ h2 em {
   color: var(--ink);
   border-radius: clamp(18px, 3vw, 40px) clamp(18px, 3vw, 40px) 0 0;
   --rule: rgba(20, 18, 15, 0.16);
+  --accent: #3b45c9;
 }
 .work ::selection {
   background: var(--ink);
@@ -598,14 +598,14 @@ h2 em {
 }
 .project:hover .project-no,
 .project.open .project-no {
-  color: var(--vermilion);
-  -webkit-text-stroke-color: var(--vermilion);
+  color: var(--accent);
+  -webkit-text-stroke-color: var(--accent);
 }
 .project-head {
   grid-column: 3 / 13;
 }
 .kicker {
-  color: var(--vermilion);
+  color: var(--accent);
   margin-bottom: 0.5rem;
 }
 .project h3 {
@@ -638,7 +638,7 @@ h2 em {
   cursor: pointer;
 }
 .project-toggle:focus-visible {
-  outline: 2px solid var(--vermilion);
+  outline: 2px solid var(--accent);
   outline-offset: 6px;
 }
 /* A ring with a plus that turns into a cross when the project is open. */
@@ -665,8 +665,8 @@ h2 em {
 }
 .project:hover .plus,
 .project.open .plus {
-  background: var(--vermilion);
-  border-color: var(--vermilion);
+  background: var(--accent);
+  border-color: var(--accent);
 }
 .project:hover .plus::before,
 .project:hover .plus::after,
@@ -754,8 +754,8 @@ h2 em {
   transition: color 0.3s, border-color 0.3s;
 }
 .repo:hover {
-  color: var(--vermilion);
-  border-color: var(--vermilion);
+  color: var(--accent);
+  border-color: var(--accent);
 }
 /* Even projects step to the right, so the column never settles into a grid. */
 .project.shift .project-no {
@@ -833,7 +833,7 @@ h2 em {
   content: "→";
   position: absolute;
   left: 0;
-  color: var(--vermilion);
+  color: var(--accent);
 }
 
 /* ---------- Toolkit ---------- */
@@ -859,7 +859,7 @@ h2 em {
   font-family: var(--serif);
   font-style: italic;
   font-size: 2.6rem;
-  color: var(--vermilion);
+  color: var(--accent);
   opacity: 0.55;
   line-height: 1;
   font-variation-settings: "SOFT" 100, "WONK" 1;
@@ -876,7 +876,7 @@ h2 em {
   line-height: 1.45;
 }
 .sep {
-  color: var(--vermilion);
+  color: var(--accent);
 }
 .footnote {
   margin-top: clamp(4rem, 8vw, 7rem);
@@ -888,7 +888,7 @@ h2 em {
   background: var(--ink);
 }
 .footnote .mono {
-  color: var(--vermilion);
+  color: var(--accent);
 }
 .degree {
   font-family: var(--serif);
@@ -960,9 +960,9 @@ h2 em {
   transition: background 0.3s, color 0.3s;
 }
 .copy:hover {
-  background: var(--vermilion);
+  background: var(--accent);
   color: var(--ink);
-  border-color: var(--vermilion);
+  border-color: var(--accent);
 }
 .contact-links {
   display: flex;
@@ -977,8 +977,8 @@ h2 em {
   transition: color 0.3s, border-color 0.3s;
 }
 .contact-links a:hover {
-  color: var(--vermilion);
-  border-color: var(--vermilion);
+  color: var(--accent);
+  border-color: var(--accent);
 }
 .open-to {
   display: grid;
@@ -1009,7 +1009,7 @@ h2 em {
 }
 .open-kind .mono {
   font-style: normal;
-  color: var(--vermilion);
+  color: var(--accent);
 }
 .availability {
   display: flex;
@@ -1032,7 +1032,7 @@ h2 em {
   text-transform: none;
 }
 .footer a:hover {
-  color: var(--vermilion);
+  color: var(--accent);
 }
 
 .toast {
