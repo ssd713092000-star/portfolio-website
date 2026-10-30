@@ -579,8 +579,7 @@ h2 em {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   column-gap: 16px;
-  row-gap: 1.6rem;
-  padding: clamp(2.5rem, 5vw, 4.5rem) 0;
+  padding: clamp(2rem, 4vw, 3.5rem) 0;
   border-top: 1px solid var(--rule);
 }
 .project:last-child {
@@ -597,12 +596,13 @@ h2 em {
   -webkit-text-stroke: 1px var(--ink);
   transition: color 0.5s var(--ease);
 }
-.project:hover .project-no {
+.project:hover .project-no,
+.project.open .project-no {
   color: var(--vermilion);
   -webkit-text-stroke-color: var(--vermilion);
 }
 .project-head {
-  grid-column: 3 / 10;
+  grid-column: 3 / 13;
 }
 .kicker {
   color: var(--vermilion);
@@ -621,11 +621,90 @@ h2 em {
   font-style: italic;
   font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
 }
+.project-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  font-variation-settings: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.project-toggle:focus-visible {
+  outline: 2px solid var(--vermilion);
+  outline-offset: 6px;
+}
+/* A ring with a plus that turns into a cross when the project is open. */
+.plus {
+  position: relative;
+  flex: none;
+  width: clamp(2.4rem, 3.6vw, 3.2rem);
+  aspect-ratio: 1;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  transition: transform 0.5s var(--ease), background 0.3s, border-color 0.3s;
+}
+.plus::before,
+.plus::after {
+  content: "";
+  position: absolute;
+  inset: 50% 28% auto;
+  height: 1px;
+  background: var(--ink);
+  transition: background 0.3s;
+}
+.plus::after {
+  transform: rotate(90deg);
+}
+.project:hover .plus,
+.project.open .plus {
+  background: var(--vermilion);
+  border-color: var(--vermilion);
+}
+.project:hover .plus::before,
+.project:hover .plus::after,
+.project.open .plus::before,
+.project.open .plus::after {
+  background: var(--paper);
+}
+.project.open .plus {
+  transform: rotate(135deg);
+}
+/* Collapsed to zero height; the 0fr → 1fr row lets it slide open to its natural size. */
+.project-body {
+  grid-column: 3 / 13;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.6s var(--ease);
+}
+.project.open .project-body {
+  grid-template-rows: 1fr;
+}
+.project-inner {
+  min-height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
+  gap: 1.6rem 16px;
+  transition: visibility 0s linear 0.6s;
+}
+.project.open .project-inner {
+  visibility: visible;
+  transition-delay: 0s;
+}
 .project-cols {
-  grid-column: 3 / 10;
   display: grid;
   grid-template-columns: 1fr 1.25fr;
   gap: 2rem;
+  margin-top: 2rem;
   color: #3d372f;
 }
 .col-label {
@@ -633,9 +712,7 @@ h2 em {
   margin-bottom: 0.4rem;
 }
 .results {
-  grid-column: 10 / 13;
-  grid-row: 1 / 3;
-  align-self: start;
+  margin-top: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
@@ -656,7 +733,7 @@ h2 em {
   color: var(--muted);
 }
 .stack {
-  grid-column: 3 / 13;
+  grid-column: 1 / -1;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
@@ -669,8 +746,9 @@ h2 em {
   letter-spacing: 0.02em;
 }
 .repo {
-  grid-column: 3 / 13;
+  grid-column: 1 / -1;
   justify-self: start;
+  margin-bottom: 4px;
   border-bottom: 1px solid var(--ink);
   padding-bottom: 2px;
   transition: color 0.3s, border-color 0.3s;
@@ -679,22 +757,16 @@ h2 em {
   color: var(--vermilion);
   border-color: var(--vermilion);
 }
-.project.shift .repo {
-  grid-column: 4 / 13;
-}
 /* Even projects step to the right, so the column never settles into a grid. */
 .project.shift .project-no {
   grid-column: 2 / 4;
 }
 .project.shift .project-head,
-.project.shift .project-cols {
-  grid-column: 4 / 11;
-}
-.project.shift .results {
-  grid-column: 11 / 13;
-}
-.project.shift .stack {
+.project.shift .project-body {
   grid-column: 4 / 13;
+}
+.project.shift .project-inner {
+  grid-template-columns: minmax(0, 7fr) minmax(0, 2fr);
 }
 
 /* ---------- Path ---------- */
@@ -1020,28 +1092,24 @@ h2 em {
   .project.shift .project-no {
     grid-column: 1 / -1;
     grid-row: auto;
+    margin-bottom: 1rem;
   }
   .project-head,
-  .project-cols,
+  .project-body,
   .project.shift .project-head,
-  .project.shift .project-cols,
-  .stack,
-  .project.shift .stack,
-  .repo,
-  .project.shift .repo {
+  .project.shift .project-body {
     grid-column: 1 / -1;
   }
   .project.shift .project-head,
-  .project.shift .project-cols,
-  .project.shift .stack,
-  .project.shift .repo,
-  .project.shift .results {
+  .project.shift .project-body {
     padding-left: 8%;
   }
-  .results,
-  .project.shift .results {
-    grid-column: 1 / -1;
-    grid-row: auto;
+  .project-inner,
+  .project.shift .project-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .results {
+    margin-top: 0;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 1.2rem 2.5rem;
@@ -1091,10 +1159,7 @@ h2 em {
     gap: 1.2rem;
   }
   .project.shift .project-head,
-  .project.shift .project-cols,
-  .project.shift .stack,
-  .project.shift .repo,
-  .project.shift .results {
+  .project.shift .project-body {
     padding-left: 0;
   }
   .stats {

@@ -103,17 +103,25 @@ function work(): string {
       <p class="project-no" aria-hidden="true">${pad(i + 1)}</p>
       <div class="project-head">
         <p class="kicker mono">${esc(p.kicker)}</p>
-        <h3>${esc(p.title)}</h3>
+        <h3>
+          <button class="project-toggle" type="button" aria-expanded="false" aria-controls="project-${i + 1}">
+            <span>${esc(p.title)}</span><i class="plus" aria-hidden="true"></i>
+          </button>
+        </h3>
       </div>
-      <div class="project-cols">
-        <div><p class="col-label mono">The problem</p><p>${esc(p.problem)}</p></div>
-        <div><p class="col-label mono">What I built</p><p>${esc(p.built)}</p></div>
+      <div class="project-body" id="project-${i + 1}">
+        <div class="project-inner">
+          <div class="project-cols">
+            <div><p class="col-label mono">The problem</p><p>${esc(p.problem)}</p></div>
+            <div><p class="col-label mono">What I built</p><p>${esc(p.built)}</p></div>
+          </div>
+          <ul class="results">
+            ${p.result.map((r) => `<li><strong>${esc(r.figure)}</strong><span>${esc(r.label)}</span></li>`).join("")}
+          </ul>
+          <ul class="stack mono">${p.stack.map((s) => `<li>${esc(s)}</li>`).join("")}</ul>
+          ${p.link ? `<a class="repo mono" href="${esc(p.link)}" target="_blank" rel="noopener">View on GitHub <span>↗</span></a>` : ""}
+        </div>
       </div>
-      <ul class="results">
-        ${p.result.map((r) => `<li><strong>${esc(r.figure)}</strong><span>${esc(r.label)}</span></li>`).join("")}
-      </ul>
-      <ul class="stack mono">${p.stack.map((s) => `<li>${esc(s)}</li>`).join("")}</ul>
-      ${p.link ? `<a class="repo mono" href="${esc(p.link)}" target="_blank" rel="noopener">View on GitHub <span>↗</span></a>` : ""}
     </article>`
     )
     .join("");
@@ -249,6 +257,15 @@ const revealObserver = new IntersectionObserver(
   { threshold: 0.12, rootMargin: "0px 0px -6% 0px" }
 );
 document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
+
+// Projects open to their full write-up on click; only the titles show at first.
+document.querySelectorAll<HTMLButtonElement>(".project-toggle").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const open = btn.getAttribute("aria-expanded") !== "true";
+    btn.setAttribute("aria-expanded", String(open));
+    btn.closest(".project")?.classList.toggle("open", open);
+  });
+});
 
 // Count-up for the stats.
 function countUp(el: HTMLElement): void {
