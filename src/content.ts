@@ -65,6 +65,20 @@ export const stats = [
 
 export const projects: Project[] = [
   {
+    title: "BigQuery Text-to-SQL Analyst",
+    kicker: "Side project · agentic AI",
+    problem:
+      "Letting people ask a warehouse questions in plain English is only safe if the agent can't write, can't run up a bill, and can't see data the person asking isn't allowed to see.",
+    built:
+      "A LangChain agent (Gemini or Claude on Vertex AI) that writes BigQuery SQL through a FastMCP server. Every query is dry-run, must be a SELECT on allowed datasets under a byte cap, and runs only after you approve its SQL and cost, with your own Google token so BigQuery IAM applies. Confirmed answers become RAG examples. Next.js + FastAPI + Postgres, each service on Cloud Run with its own CI/CD.",
+    result: [
+      { figure: "0.88", label: "execution accuracy on the eval benchmark" },
+      { figure: "50", label: "benchmark questions across 7 categories" },
+    ],
+    stack: ["LangChain", "MCP", "BigQuery", "Vertex AI", "FastAPI", "Next.js", "Cloud Run"],
+    link: "https://github.com/ssd713092000-star/bigq-text-to-sql",
+  },
+  {
     title: "MovieLens on dbt",
     kicker: "Side project · analytics engineering",
     problem:
